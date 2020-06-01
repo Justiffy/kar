@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from "react-router-dom";
 
-function App() {
+import { ApiContext } from './api/useApi';
+import { HkApi } from "./api/hkApi";
+import {Root} from './components/Root';
+
+const api = new HkApi({ url: "https://2ch.hk" });
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ApiContext.Provider value={api}>
+      <BrowserRouter>
+        <Root />
+      </BrowserRouter>
+    </ApiContext.Provider>
+  )
 }
 
 export default App;
