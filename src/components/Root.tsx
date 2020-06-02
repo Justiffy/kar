@@ -6,7 +6,7 @@ import { Board } from '../pages/WebM'
 export const Root: React.FC = () => {
   return (
     <Switch>
-      <Route path="/b">
+      <Route path="/">
         <Board />
       </Route>
     </Switch>
