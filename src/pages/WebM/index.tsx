@@ -1,5 +1,6 @@
 import React, { useEffect,  useState } from 'react';
 
+import { ReactComponent  as RightArrow } from 'assets/icon/right-arrow.svg'
 import { useApi } from 'api/useApi';
 import { file } from 'api/types/endpoints';
 
@@ -31,7 +32,7 @@ export const Board: React.FC = () => {
             }
           })
         })
-        await new Promise((resolve) => setTimeout(resolve, 4000));
+        await new Promise((resolve) => setTimeout(resolve, 700));
       }
     }
     fetch();
@@ -44,7 +45,8 @@ export const Board: React.FC = () => {
 
   return (
     <div>
-      {!!playList.length && (
+      {!!playList.length 
+        ? (
         <div className="container">
           <video
             autoPlay
@@ -53,13 +55,17 @@ export const Board: React.FC = () => {
             src={'https://2ch.hk' + playList[currentIndex].path}
           />
           <span>{playList[currentIndex].name}</span>
-          <span>{playList[currentIndex].nsfw}</span>
-          <div>
-            <input type="button" value="<-" onClick={() => nextFile(-1)} />
-            <input type="button" value="->" onClick={() => nextFile(1)} />
+          <span>{`NSFW: ${playList[currentIndex].nsfw}`}</span>
+          <div className="arrowBlock">
+            <RightArrow onClick={() => nextFile(-1)} className="leftArrow" />
+            <RightArrow onClick={() => nextFile(1)} className="rightArrow" />
           </div>
         </div>
-      )}
+      ) : (
+          <div className="preload">     
+            Search WEBm... w8
+          </div>
+        )}
     </div>
   )
 } 

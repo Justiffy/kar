@@ -1,6 +1,28 @@
+.preload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
+}
+
+.arrowBlock {
+  margin-top: 50px;
+}
+
+.leftArrow {
+  transform: rotate(180deg);
+  margin-right: 100px;
+}
+
+.leftArrow,
+.rightArrow {
+  width: 30px;
+  cursor: pointer;
 }
