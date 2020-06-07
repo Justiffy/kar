@@ -1,7 +1,7 @@
 import React, { useEffect,  useState } from 'react';
 
 import { useApi } from 'api/useApi';
-import { file } from 'api/types/endpoints'
+import { file } from 'api/types/endpoints';
 
 import './style.css'
 
@@ -11,27 +11,27 @@ export const Board: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   
   useEffect(() => {
-    console.log('test!!!!!!!')
     const fetch = async () => {
       let thredIndex = 0;
       const threadList = await api?.getAllThreads();
       const threadsID = threadList?.threads.map(el => el.num);
+      
       if (!threadsID) return;
       
       while (threadsID.length > thredIndex) {
-        const dataQ = await api?.getAllPostsByThread(threadsID[thredIndex]);
+        const postsByThreads = await api?.getAllPostsByThread(threadsID[thredIndex]);
         thredIndex += 1;
-        if (!Array.isArray(dataQ)) continue;
-        dataQ?.forEach(post => {
+        if (!Array.isArray(postsByThreads)) continue;
+        postsByThreads?.forEach(post => {
           if (!post.files.length) return;
 
-          post.files.forEach(file => {
+          post.files.forEach((file: file) => {
             if (file.duration) {
-              setPlayList((files: any) => [...files, file]);
+              setPlayList((files: file[]) => [...files, file]);
             }
           })
         })
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 4000));
       }
     }
     fetch();
